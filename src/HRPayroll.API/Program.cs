@@ -2,8 +2,6 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Asp.Versioning;
-using Azure.Extensions.AspNetCore.Configuration.Secrets;
-using Azure.Identity;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
@@ -17,12 +15,6 @@ using HRPayroll.Infrastructure.Authentication;
 using Scalar.AspNetCore;
 
 var builder = WebApplication.CreateBuilder(args);
-
-var keyVaultUri = builder.Configuration["KeyVault:VaultUri"];
-if (Uri.TryCreate(keyVaultUri, UriKind.Absolute, out var parsedKeyVaultUri))
-{
-    builder.Configuration.AddAzureKeyVault(parsedKeyVaultUri, new DefaultAzureCredential());
-}
 
 var jwtOptions = builder.Configuration.GetSection(JwtOptions.SectionName).Get<JwtOptions>() ?? new JwtOptions();
 
