@@ -1,0 +1,127 @@
+.page-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.page-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.header-title h2 {
+  font-size: 22px;
+  font-weight: 700;
+  color: #0f172a;
+  margin: 0 0 4px 0;
+}
+
+.header-title p {
+  font-size: 14px;
+  color: #64748b;
+  margin: 0;
+}
+
+.table-card {
+  border-radius: 12px;
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.05), 0 1px 2px -1px rgba(0, 0, 0, 0.05);
+  border: 1px solid #e2e8f0;
+  background-color: #ffffff;
+  padding: 16px;
+}
+
+.table-actions {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 16px;
+}
+
+.search-field {
+  width: 100%;
+  max-width: 320px;
+}
+
+.table-container {
+  position: relative;
+  min-height: 200px;
+  overflow-x: auto;
+}
+
+.loading-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(255, 255, 255, 0.7);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 5;
+}
+
+.employees-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.employees-table th {
+  font-weight: 600;
+  color: #475569;
+  font-size: 14px;
+}
+
+.employees-table td {
+  font-size: 14px;
+  color: #334155;
+  height: 52px;
+}
+
+.font-semibold {
+  font-weight: 600;
+}
+
+.text-slate-800 {
+  color: #1e293b !important;
+}
+
+.text-emerald-600 {
+  color: #059669 !important;
+}
+
+.badge-dept {
+  background-color: #f0fdf4;
+  color: #166534;
+  padding: 4px 8px;
+  border-radius: 6px;
+  font-size: 12px;
+  font-weight: 500;
+}
+
+/* Dark Theme Support */
+.dark-theme .header-title h2 { color: #f8fafc; }
+.dark-theme .header-title p { color: #94a3b8; }
+.dark-theme .table-card {
+  background-color: #1e293b;
+  border: 1px solid #334155;
+}
+.dark-theme .employees-table th {
+  color: #94a3b8;
+}
+.dark-theme .employees-table td {
+  color: #cbd5e1;
+}
+.dark-theme .text-slate-800 {
+  color: #f1f5f9 !important;
+}
+.dark-theme .text-emerald-600 {
+  color: #34d399 !important;
+}
+.dark-theme .badge-dept {
+  background-color: #14532d;
+  color: #bbf7d0;
+}
+.dark-theme .loading-overlay {
+  background-color: rgba(30, 41, 59, 0.7);
+}

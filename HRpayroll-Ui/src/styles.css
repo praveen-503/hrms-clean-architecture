@@ -1,0 +1,31 @@
+@import "@angular/material/prebuilt-themes/indigo-pink.css";
+
+html, body {
+  height: 100%;
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+  box-sizing: border-box;
+}
+
+*, *:before, *:after {
+  box-sizing: inherit;
+}
+
+body {
+  background-color: #f1f5f9;
+  color: #0f172a;
+}
+
+/* Dark Theme overrides for global backgrounds */
+body.dark-theme {
+  background-color: #0f172a;
+  color: #f8fafc;
+}
+
+/* Customized Snackbar Styles */
+.error-snackbar {
+  --mdc-snackbar-container-color: #fef2f2;
+  --mdc-snackbar-supporting-text-color: #991b1b;
+  border: 1px solid #fee2e2;
+  border-radius: 8px;
+}

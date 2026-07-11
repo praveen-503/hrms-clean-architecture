@@ -1,0 +1,47 @@
+<div class="login-wrapper">
+  <mat-card class="login-card">
+    <div class="card-header">
+      <mat-icon class="brand-icon">account_balance</mat-icon>
+      <h1 class="brand-title">HR payroll</h1>
+      <p class="brand-subtitle">Enterprise HR &amp; Payroll Management System</p>
+    </div>
+
+    <mat-card-content class="card-content">
+      <div class="error-banner" *ngIf="errorMessage()">
+        <mat-icon>error_outline</mat-icon>
+        <span>{{ errorMessage() }}</span>
+      </div>
+
+      <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="login-form">
+        <!-- Email field -->
+        <mat-form-field appearance="outline" class="form-field">
+          <mat-label>Email Address</mat-label>
+          <input matInput type="email" formControlName="email" placeholder="e.g. admin@company.com" autocomplete="username">
+          <mat-icon matSuffix>email</mat-icon>
+          <mat-error *ngIf="loginForm.get('email')?.hasError('required')">Email is required.</mat-error>
+          <mat-error *ngIf="loginForm.get('email')?.hasError('email')">Please enter a valid email address.</mat-error>
+        </mat-form-field>
+
+        <!-- Password field -->
+        <mat-form-field appearance="outline" class="form-field">
+          <mat-label>Password</mat-label>
+          <input matInput [type]="hidePassword() ? 'password' : 'text'" formControlName="password" autocomplete="current-password">
+          <button mat-icon-button matSuffix type="button" (click)="togglePasswordVisibility()" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hidePassword()">
+            <mat-icon>{{ hidePassword() ? 'visibility_off' : 'visibility' }}</mat-icon>
+          </button>
+          <mat-error *ngIf="loginForm.get('password')?.hasError('required')">Password is required.</mat-error>
+          <mat-error *ngIf="loginForm.get('password')?.hasError('minlength')">Password must be at least 6 characters.</mat-error>
+        </mat-form-field>
+
+        <div class="form-options">
+          <a routerLink="/forgot-password" class="forgot-link">Forgot Password?</a>
+        </div>
+
+        <button mat-raised-button color="primary" type="submit" [disabled]="loginForm.invalid || isLoading()" class="submit-btn">
+          <mat-spinner diameter="20" *ngIf="isLoading()" class="spinner"></mat-spinner>
+          <span *ngIf="!isLoading()">Sign In</span>
+        </button>
+      </form>
+    </mat-card-content>
+  </mat-card>
+</div>

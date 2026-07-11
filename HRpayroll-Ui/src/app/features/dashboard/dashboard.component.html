@@ -1,0 +1,80 @@
+<div class="dashboard-wrapper">
+  <!-- Welcome Area -->
+  <header class="dashboard-header">
+    <div class="welcome-text">
+      <h2>Welcome Back, {{ authService.userFullName() }}</h2>
+      <p>Here is what's happening in your organization today.</p>
+    </div>
+    <div class="header-actions">
+      <button mat-flat-button color="primary">
+        <mat-icon>add</mat-icon>
+        <span>Add Employee</span>
+      </button>
+    </div>
+  </header>
+
+  <!-- Stats Grid -->
+  <div class="stats-grid">
+    <mat-card class="stat-card" *ngFor="let stat of stats()">
+      <mat-card-content class="stat-content">
+        <div class="stat-left">
+          <span class="stat-title">{{ stat.title }}</span>
+          <span class="stat-value">{{ stat.value }}</span>
+          <span class="stat-change" [class.positive]="stat.isPositive" [class.negative]="!stat.isPositive">
+            {{ stat.change }}
+          </span>
+        </div>
+        <div class="stat-right" [style.background-color]="stat.color + '1c'">
+          <mat-icon [style.color]="stat.color">{{ stat.icon }}</mat-icon>
+        </div>
+      </mat-card-content>
+    </mat-card>
+  </div>
+
+  <!-- Panels Grid -->
+  <div class="panels-grid">
+    <!-- Recent Activities -->
+    <mat-card class="panel-card flex-2">
+      <mat-card-header>
+        <mat-card-title class="panel-title">Recent System Activities</mat-card-title>
+      </mat-card-header>
+      <mat-card-content class="panel-content">
+        <div class="activity-timeline">
+          <div class="activity-item" *ngFor="let log of activities()">
+            <div class="activity-badge" [ngClass]="log.badgeClass">
+              <mat-icon>{{ log.icon }}</mat-icon>
+            </div>
+            <div class="activity-details">
+              <span class="activity-title">{{ log.title }}</span>
+              <span class="activity-desc">{{ log.user }}</span>
+              <span class="activity-time">{{ log.time }}</span>
+            </div>
+          </div>
+        </div>
+      </mat-card-content>
+    </mat-card>
+
+    <!-- Quick Actions Panel -->
+    <mat-card class="panel-card flex-1">
+      <mat-card-header>
+        <mat-card-title class="panel-title">Quick Tasks</mat-card-title>
+      </mat-card-header>
+      <mat-card-content class="panel-content">
+        <div class="tasks-list">
+          <button mat-stroked-button class="task-btn">
+            <mat-icon color="primary">pending_actions</mat-icon>
+            <span>Review Leave Requests</span>
+          </button>
+          <button mat-stroked-button class="task-btn">
+            <mat-icon color="warn">payments</mat-icon>
+            <span>Run Payroll Cycle</span>
+          </button>
+          <button mat-stroked-button class="task-btn">
+            <mat-icon color="accent">insights</mat-icon>
+            <span>Export Monthly Reports</span>
+          </button>
+        </div>
+      </mat-card-content>
+    </mat-card>
+  </div>
+</div>

@@ -1,0 +1,96 @@
+<mat-sidenav-container class="app-container" [class.dark-theme]="isDarkMode()">
+  <!-- Sidebar -->
+  <mat-sidenav mode="side" opened [class.collapsed]="isCollapsed()" class="app-sidenav">
+    <div class="logo-section">
+      <mat-icon class="logo-icon">account_balance</mat-icon>
+      <span class="logo-text" *ngIf="!isCollapsed()">HR payroll</span>
+    </div>
+
+    <mat-nav-list class="nav-list">
+      <a mat-list-item *ngFor="let item of menuItems()" [routerLink]="item.route" routerLinkActive="active-link" class="nav-item">
+        <mat-icon matListItemIcon [matTooltip]="isCollapsed() ? item.label : ''" matTooltipPosition="right">{{ item.icon }}</mat-icon>
+        <span matListItemTitle *ngIf="!isCollapsed()">{{ item.label }}</span>
+      </a>
+    </mat-nav-list>
+
+    <div class="sidebar-footer">
+      <button mat-icon-button (click)="toggleSidebar()" class="collapse-btn">
+        <mat-icon>{{ isCollapsed() ? 'chevron_right' : 'chevron_left' }}</mat-icon>
+      </button>
+    </div>
+  </mat-sidenav>
+
+  <!-- Main Content Sidenav Area -->
+  <mat-sidenav-content class="app-content-area">
+    <!-- Top Header Navigation -->
+    <mat-toolbar color="primary" class="app-toolbar">
+      <div class="toolbar-left">
+        <span class="breadcrumb-title">HR & Payroll Portal</span>
+      </div>
+
+      <div class="toolbar-right">
+        <!-- Theme Toggle -->
+        <button mat-icon-button (click)="toggleTheme()" [matTooltip]="isDarkMode() ? 'Switch to Light Mode' : 'Switch to Dark Mode'">
+          <mat-icon>{{ isDarkMode() ? 'light_mode' : 'dark_mode' }}</mat-icon>
+        </button>
+
+        <!-- Notifications -->
+        <button mat-icon-button [matMenuTriggerFor]="notificationMenu" matTooltip="Notifications">
+          <mat-icon [matBadge]="3" matBadgeColor="warn">notifications</mat-icon>
+        </button>
+        <mat-menu #notificationMenu="matMenu" xPosition="before" class="notification-dropdown">
+          <div class="notification-header">Notifications</div>
+          <button mat-menu-item>
+            <mat-icon color="primary">info</mat-icon>
+            <span>Welcome back, {{ authService.userFullName() }}!</span>
+          </button>
+          <button mat-menu-item>
+            <mat-icon color="warn">pending_actions</mat-icon>
+            <span>Pending leaves approval: 3 requests</span>
+          </button>
+          <button mat-menu-item>
+            <mat-icon color="accent">payments</mat-icon>
+            <span>Payroll run processed for June.</span>
+          </button>
+        </mat-menu>
+
+        <!-- User Profile Dropdown -->
+        <button mat-button [matMenuTriggerFor]="profileMenu" class="profile-btn">
+          <div class="avatar-circle">{{ authService.userFullName().charAt(0) }}</div>
+          <span class="username-text">{{ authService.userFullName() }}</span>
+          <mat-icon class="dropdown-arrow">arrow_drop_down</mat-icon>
+        </button>
+        <mat-menu #profileMenu="matMenu" xPosition="before">
+          <div class="profile-header">
+            <p class="profile-name">{{ authService.userFullName() }}</p>
+            <p class="profile-role">{{ authService.userRole() }}</p>
+          </div>
+          <mat-divider></mat-divider>
+          <button mat-menu-item>
+            <mat-icon>account_circle</mat-icon>
+            <span>My Profile</span>
+          </button>
+          <button mat-menu-item>
+            <mat-icon>settings</mat-icon>
+            <span>Settings</span>
+          </button>
+          <mat-divider></mat-divider>
+          <button mat-menu-item (click)="logout()">
+            <mat-icon>exit_to_app</mat-icon>
+            <span>Logout</span>
+          </button>
+        </mat-menu>
+      </div>
+    </mat-toolbar>
+
+    <!-- Page Outlet -->
+    <main class="page-content">
+      <router-outlet></router-outlet>
+    </main>
+
+    <!-- Footer -->
+    <footer class="app-footer">
+      <span>Enterprise HR & Payroll Portal &copy; 2026. All rights reserved.</span>
+    </footer>
+  </mat-sidenav-content>
+</mat-sidenav-container>
